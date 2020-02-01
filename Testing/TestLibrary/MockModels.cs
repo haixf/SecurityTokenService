@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TestLibrary
 {
-    public static class Models
+    public static class MockModels
     {
 
         public static Client Client

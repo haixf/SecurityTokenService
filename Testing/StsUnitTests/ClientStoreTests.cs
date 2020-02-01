@@ -19,15 +19,15 @@ namespace StsUnitTests
         [Fact]
         public void FindClientByIdAsync_ClientExists()
         {
-            DatabaseHelper.AddEntryIntoDatabase(context, Models.Client);
+            DatabaseHelper.AddEntryIntoDatabase(context, MockModels.Client);
             
-            Assert.NotNull(store.FindClientByIdAsync(Models.Client.ClientName).Result);
+            Assert.NotNull(store.FindClientByIdAsync(MockModels.Client.ClientName).Result);
         }
 
         [Fact]
         public void FindClientByIdAsync_ClientNotExist()
         {
-            Assert.Null(store.FindClientByIdAsync(Models.Client.ClientName).Result);
+            Assert.Null(store.FindClientByIdAsync(MockModels.Client.ClientName).Result);
         }
     }
 }
