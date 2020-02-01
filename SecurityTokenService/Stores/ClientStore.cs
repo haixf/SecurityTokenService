@@ -16,18 +16,16 @@ namespace SecurityTokenService.Stores
             using (var context = new DatabaseContext())
             {
                 var client = context.Clients.Where(x => x.ClientId == clientId).FirstOrDefault();
-                
-                return Task.FromResult(GetAllClientInformation(client, context).ConvertToIdsModel(context));
+                GetAllClientInformation(client, context);
+                return Task.FromResult(client.ConvertToIdsModel(context));
             }
         }
 
-        private static Models.Client GetAllClientInformation(Models.Client client, DatabaseContext databaseContext)
+        private static void GetAllClientInformation(Models.Client client, DatabaseContext databaseContext)
         {
             client.ClientUris = databaseContext.ClientUris.Where(x => x.ClientKey == client.Key).ToList();
             client.ClientSecrets = databaseContext.ClientSecrets.Where(x => x.ClientKey == client.Key).ToList();
             client.AllowedScopes = databaseContext.ClientScopes.Where(x => x.ClientKey == client.Key).ToList();
-
-            return client;
         }
     }
 }

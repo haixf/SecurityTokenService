@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SecurityTokenService.Models
 {
     [Table("Resources", Schema = "sts")]
-    public class Resource
+    public class ResourceTableModel
     {
         [Key]
         public Guid Key { get; set; }
@@ -17,12 +17,13 @@ namespace SecurityTokenService.Models
         public bool Enabled { get; set; }
         public string DisplayName { get; set; }
         public ResourceTypes ResourceType { get; set; }
-        public List<Scope> Scopes { get; set; }
-
+        public bool Required { get; set; }
+        public bool Emphasize { get; set; }
+        public bool ShowInDiscoveryDocument { get; set; }
         public enum ResourceTypes
         {
-            IDENTITY,
-            API
+            IDENTITY = 0,
+            API = 1
         }
     }
 }

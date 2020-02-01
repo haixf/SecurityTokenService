@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [sts].[Resources]
 (
     [Key] UNIQUEIDENTIFIER PRIMARY KEY,
-	[ResourceType] NVARCHAR(10) NOT NULL,
+	[ResourceType] INT NOT NULL,
 	[Name] NVARCHAR(100) NOT NULL UNIQUE,
 	[DisplayName] NVARCHAR(100) NOT NULL UNIQUE,
 	[Description] NVARCHAR(200) NULL,

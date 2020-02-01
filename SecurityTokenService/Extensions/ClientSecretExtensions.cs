@@ -13,7 +13,7 @@ namespace SecurityTokenService.Extensions
             return new IdentityServer4.Models.Secret
             {
                 Description = secret.Description,
-                Expiration = secret.Expiration,
+                Expiration = secret.Expiration.Value.DateTime,
                 Type = secret.Type,
                 Value = secret.Value
             };

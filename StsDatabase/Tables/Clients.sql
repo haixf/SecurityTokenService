@@ -11,11 +11,9 @@
 	[AccessTokenLifetime] INT NOT NULL DEFAULT 3600,
 	[AuthorizationCodeLifetime] INT NOT NULL DEFAULT 3600,
 	[SlidingTokenLifetime] INT NOT NULL DEFAULT 3600,
-	[ConsentLifeTime] INT NULL,
+	[ConsentLifetime] INT NULL,
 	[RefreshTokenUsage] INT NOT NULL DEFAULT 0,
 	[UpdateAccessTokenClaimsOnRefresh] BIT NOT NULL DEFAULT 1,
 	[RefreshTokenExpiration] INT NOT NULL DEFAULT 1,
-	[AccessTokenType] INT NOT NULL DEFAULT 0,
-	[IncludeJwtId] INT NOT NULL Default 1,
-	[AlwaysSendClientClaims] INT NOT NULL DEFAULT 1
+	[IncludeJwtId] BIT NOT NULL Default 1,
 )

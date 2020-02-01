@@ -17,7 +17,7 @@ namespace SecurityTokenService.Models
         public Guid ClientKey { get; set; }
         public string Value { get; set; }
         public string Description { get; set; }
-        public DateTime? Expiration { get; set; }
+        public DateTimeOffset? Expiration { get; set; }
         public string Type = "SharedSecret";
     }
 }

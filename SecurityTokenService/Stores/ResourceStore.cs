@@ -17,7 +17,7 @@ namespace SecurityTokenService.Stores
         {
             using (var context = new DatabaseContext())
             {
-                return Task.FromResult(context.Resources.Where(x => x.ResourceType == Models.Resource.ResourceTypes.API && x.Name == name).FirstOrDefault().ConvertToApiModel());
+                return Task.FromResult(context.Resources.Where(x => x.ResourceType == Models.ResourceTableModel.ResourceTypes.API && x.Name == name).FirstOrDefault().ConvertToApiModel());
             }
         }
 
@@ -26,8 +26,9 @@ namespace SecurityTokenService.Stores
             using (var context = new DatabaseContext())
             {
                 var apiResources = new List<ApiResource>();
-                foreach (var resource in context.Resources.Where(x => x.ResourceType == Models.Resource.ResourceTypes.API))
+                foreach (var resource in context.Resources.Where(x => x.ResourceType == Models.ResourceTableModel.ResourceTypes.API))
                 {
+                    GetAllResourceInformation(resource, context);
                     if (resource.Scopes.Select(x => x.Name).Intersect(scopeNames).Any())
                     {
                         apiResources.Add(resource.ConvertToApiModel());
@@ -50,16 +51,21 @@ namespace SecurityTokenService.Stores
         {
             using (var context = new DatabaseContext())
             {
-                var apiResources = context.Resources.Where(x => x.ResourceType == Models.Resource.ResourceTypes.API)
+                var apiResources = context.Resources.Where(x => x.ResourceType == Models.ResourceTableModel.ResourceTypes.API)
                                                 .Select(x => x.ConvertToApiModel())
                                                 .AsEnumerable();
 
-                var identityResources = context.Resources.Where(x => x.ResourceType == Models.Resource.ResourceTypes.IDENTITY)
+                var identityResources = context.Resources.Where(x => x.ResourceType == Models.ResourceTableModel.ResourceTypes.IDENTITY)
                                                          .Select(x => x.ConvertToIdentityModel())
                                                          .AsEnumerable();
 
                 return Task.FromResult(new Resources(identityResources, apiResources));
             }
+        }
+
+        private static void GetAllResourceInformation(Models.Resource resource, DatabaseContext databaseContext)
+        {
+            resource.Scopes = databaseContext.Scopes.Where(x => x.ResourceKey == resource.Key).ToList();
         }
 
     }

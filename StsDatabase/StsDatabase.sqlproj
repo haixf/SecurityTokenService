@@ -76,11 +76,15 @@
     <Build Include="Tables\Scopes.sql" />
     <Build Include="Security\sts.sql" />
     <None Include="StsDatabase.publish.xml" />
+    <None Include="StsDatabase_1.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\ClientSecrets.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="StsDatabase.refactorlog" />
   </ItemGroup>
 </Project>

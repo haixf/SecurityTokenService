@@ -17,6 +17,7 @@ DECLARE @Resource_Email_Key   AS UNIQUEIDENTIFIER = '1b9e68c5-92d5-4561-8848-1d4
 DECLARE @Resource_OpenId_Key  AS UNIQUEIDENTIFIER = '94d1ad94-a8fa-46ca-aa1e-92c9eb2f30fc'
 DECLARE @Resource_Address_Key AS UNIQUEIDENTIFIER = '60d2adf9-0ba2-48b8-a932-85a8161c379b'
 DECLARE @Resource_Phone_Key   AS UNIQUEIDENTIFIER = 'a39fb52f-9a19-4855-96cc-08a2b0d24089'
+DECLARE @Resource_GoClimbApi_Key   AS UNIQUEIDENTIFIER = '1cac0e20-b9c7-45f6-9e19-c20274a8d37e'
 
 --Post Deployment data scripts
 :r ..\Data\Data_Client.sql
