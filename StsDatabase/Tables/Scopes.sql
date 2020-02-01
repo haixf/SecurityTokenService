@@ -1,0 +1,13 @@
+﻿CREATE TABLE [sts].[Scopes]
+(
+    [Key] UNIQUEIDENTIFIER PRIMARY KEY,
+	[ResourceKey] UNIQUEIDENTIFIER,
+	[Name] NVARCHAR(200) NOT NULL UNIQUE,
+	[DisplayName] NVARCHAR(200) NOT NULL UNIQUE,
+	[Description] NVARCHAR(1000) NULL,
+	[Required] BIT NOT NULL DEFAULT 0,
+	[Emphasize] BIT NOT NULL DEFAULT 0,
+	[ShowInDiscoveryDocument] BIT NOT NULL DEFAULT 1,
+
+	FOREIGN KEY ([ResourceKey]) REFERENCES [sts].[Resources]([Key])
+)
