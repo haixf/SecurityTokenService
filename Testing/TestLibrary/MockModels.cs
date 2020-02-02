@@ -31,5 +31,62 @@ namespace TestLibrary
                 };
             }
         }
+
+        public static Resource ApiResource
+        {
+            get
+            {
+                return new Resource
+                {
+                    ResourceType = ResourceTableModel.ResourceTypes.API,
+                    Name = "UnitTest_ApiResource",
+                    Description = "Unit test for api resource",
+                    DisplayName = "UnitTest_ApiResource",
+                    Enabled = true,
+                    Emphasize = true,
+                    Required = true,
+                    ShowInDiscoveryDocument = true,
+                    Key = Guid.NewGuid(),
+                    Scopes = new List<Scope>()
+                };
+            }
+        }
+
+        public static Resource IdentityResource
+        {
+            get
+            {
+                return new Resource
+                {
+                    ResourceType = ResourceTableModel.ResourceTypes.IDENTITY,
+                    Name = "UnitTest_IdentityResource",
+                    Description = "Unit test for identity resource",
+                    DisplayName = "UnitTest_IdentityResource",
+                    Enabled = true,
+                    Emphasize = true,
+                    Required = true,
+                    ShowInDiscoveryDocument = true,
+                    Key = Guid.NewGuid(),
+                    Scopes = new List<Scope>()
+                };
+            }
+        }
+
+        public static Scope Scope
+        {
+            get
+            {
+                return new Scope
+                {
+                    Key = Guid.NewGuid(),
+                    Name = "UnitTestScope",
+                    DisplayName = "UnitTestScope",
+                    Description = "Scope for Unit Testing",
+                    Emphasize = true,
+                    Required = true,
+                    ShowInDiscoveryDocument = true
+                };
+            }
+        }
     }
 }

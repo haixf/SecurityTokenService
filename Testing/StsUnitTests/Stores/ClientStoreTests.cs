@@ -2,24 +2,26 @@ using SecurityTokenService.Stores;
 using SecurityTokenService;
 using TestLibrary;
 using Xunit;
+using Microsoft.EntityFrameworkCore;
 
-namespace StsUnitTests
+namespace StsUnitTests.Stores
 {
     public class ClientStoreTests
     {
-        private DatabaseContext context;
+        private DbContextOptions options;
         private ClientStore store;
 
         public ClientStoreTests()
         {
-            context = TestHelper.PrepDbContextForUnitTesting();
-            store = new ClientStore();
+            options = TestHelper.PrepDbContextForUnitTesting();
+
+            store = new ClientStore(options);
         }
 
         [Fact]
         public void FindClientByIdAsync_ClientExists()
         {
-            DatabaseHelper.AddEntryIntoDatabase(context, MockModels.Client);
+            DatabaseHelper.AddEntryIntoDatabase(options, MockModels.Client);
             
             Assert.NotNull(store.FindClientByIdAsync(MockModels.Client.ClientName).Result);
         }

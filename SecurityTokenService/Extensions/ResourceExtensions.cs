@@ -10,6 +10,10 @@ namespace SecurityTokenService.Extensions
     {
         public static IdentityServer4.Models.ApiResource ConvertToApiModel(this Resource resource)
         {
+            if(resource == null)
+            {
+                return null;
+            }
             return new IdentityServer4.Models.ApiResource
             {
                 Name = resource.Name,
@@ -21,6 +25,10 @@ namespace SecurityTokenService.Extensions
 
         public static IdentityServer4.Models.IdentityResource ConvertToIdentityModel(this Resource resource)
         {
+            if (resource == null)
+            {
+                return null;
+            }
             return new IdentityServer4.Models.IdentityResource
             {
                 Name = resource.Name,

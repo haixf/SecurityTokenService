@@ -1,4 +1,5 @@
-﻿using SecurityTokenService;
+﻿using Microsoft.EntityFrameworkCore;
+using SecurityTokenService;
 using SecurityTokenService.Extensions;
 using SecurityTokenService.Models;
 using System;
@@ -14,7 +15,8 @@ namespace StsUnitTests.Extensions
         private DatabaseContext context;
         public ClientExtensionTests()
         {
-            context = TestHelper.PrepDbContextForUnitTesting();
+
+            context = new DatabaseContext(TestHelper.PrepDbContextForUnitTesting());
         }
 
         [Fact]

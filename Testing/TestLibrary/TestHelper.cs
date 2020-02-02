@@ -1,4 +1,5 @@
-﻿using SecurityTokenService;
+﻿using Microsoft.EntityFrameworkCore;
+using SecurityTokenService;
 using System;
 
 namespace TestLibrary
@@ -17,12 +18,9 @@ namespace TestLibrary
         /// Set DatabaseContext to unit test and generates a randomly seeded database
         /// </summary>
         /// <returns></returns>
-        public static DatabaseContext PrepDbContextForUnitTesting()
+        public static DbContextOptions PrepDbContextForUnitTesting()
         {
-            DatabaseContext.isUnitTesting = true;
-            DatabaseContext.SetUnitTestSeed(TestHelper.GenerateRandomNumber());
-
-            return new DatabaseContext();
+            return DatabaseContext.GetInMemoryOptions(GenerateRandomNumber());
         }
     }
 }

@@ -9,14 +9,6 @@ namespace SecurityTokenService
     /// </summary>
     public class DatabaseContext : DbContext
     {
-        public static bool isUnitTesting = false;
-        public static int unitTestSeed = 1;
-
-        public DatabaseContext() : base(GetOptions())
-        {
-
-        }
-
         public DatabaseContext(DbContextOptions options) : base(options)
         {
 
@@ -31,22 +23,18 @@ namespace SecurityTokenService
         public DbSet<ClientClaim> ClientClaims { get; set; }
         public DbSet<ClientSecret> ClientSecrets { get; set; }
 
-
-        public static void SetUnitTestSeed(int seed)
-        {
-            unitTestSeed = seed;
-        }
         /// <summary>
         /// Retrieve the default database connection from the appsettings file
         /// </summary>
         /// <returns></returns>
         public static DbContextOptions GetOptions()
         {
-            if (isUnitTesting)
-            {
-                return new DbContextOptionsBuilder<DatabaseContext>().UseInMemoryDatabase(unitTestSeed.ToString()).Options;
-            }
             return new DbContextOptionsBuilder<DatabaseContext>().UseSqlServer(ConfigurationHelper.Instance.ConnectionString).Options;
+        }
+
+        public static DbContextOptions GetInMemoryOptions(int unitTestSeed)
+        {
+            return new DbContextOptionsBuilder<DatabaseContext>().UseInMemoryDatabase(unitTestSeed.ToString()).Options;
         }
     }
 }

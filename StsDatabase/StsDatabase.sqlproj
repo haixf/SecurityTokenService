@@ -83,6 +83,8 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\ClientSecrets.sql" />
+    <None Include="Data\Data_Scope.sql" />
+    <None Include="Data\Data_ClientScope.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="StsDatabase.refactorlog" />

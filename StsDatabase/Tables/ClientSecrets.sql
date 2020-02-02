@@ -2,5 +2,8 @@
 (
     [Key] UNIQUEIDENTIFIER PRIMARY KEY,
 	[ClientKey] UNIQUEIDENTIFIER NOT NULL,
+	[Value] NVARCHAR(1000) NOT NULL,
+	[Expiration] DATETIMEOFFSET NULL,
+	[Description] NVARCHAR(4000) NULL,
 	FOREIGN KEY ([ClientKey]) REFERENCES [sts].[Clients]([Key]),
 )

@@ -11,11 +11,21 @@ namespace SecurityTokenService.Stores
 {
     public class ResourceStore : IResourceStore
     {
+        private DbContextOptions options;
 
+        public ResourceStore()
+        {
+            options = DatabaseContext.GetOptions();
+        }
+
+        public ResourceStore(DbContextOptions options)
+        {
+            this.options = options;
+        }
 
         public Task<ApiResource> FindApiResourceAsync(string name)
         {
-            using (var context = new DatabaseContext())
+            using (var context = new DatabaseContext(options))
             {
                 return Task.FromResult(context.Resources.Where(x => x.ResourceType == Models.ResourceTableModel.ResourceTypes.API && x.Name == name).FirstOrDefault().ConvertToApiModel());
             }
@@ -23,7 +33,7 @@ namespace SecurityTokenService.Stores
 
         public Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            using (var context = new DatabaseContext())
+            using (var context = new DatabaseContext(options))
             {
                 var apiResources = new List<ApiResource>();
                 foreach (var resource in context.Resources.Where(x => x.ResourceType == Models.ResourceTableModel.ResourceTypes.API))
@@ -41,7 +51,7 @@ namespace SecurityTokenService.Stores
 
         public Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            using (var context = new DatabaseContext())
+            using (var context = new DatabaseContext(options))
             {
                 return Task.FromResult(context.Resources.Select(x => x.ConvertToIdentityModel()).AsEnumerable());
             }
@@ -49,7 +59,7 @@ namespace SecurityTokenService.Stores
 
         public Task<Resources> GetAllResourcesAsync()
         {
-            using (var context = new DatabaseContext())
+            using (var context = new DatabaseContext(options))
             {
                 var apiResources = context.Resources.Where(x => x.ResourceType == Models.ResourceTableModel.ResourceTypes.API)
                                                 .Select(x => x.ConvertToApiModel())
